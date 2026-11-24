@@ -159,17 +159,21 @@ nav button{padding:8px 14px;white-space:nowrap}
 @media(max-width:760px){.theme-btn{order:2;margin-left:auto}.menu-btn{order:3}}
 #userBox,#userBox .btn{white-space:nowrap}@media(max-width:760px){#userBox>span{font-size:.82rem}}
 
-/* ===== Fit full pet card cleanly in viewport ===== */
-.page-hero{padding:20px 32px;margin-bottom:18px;border-radius:24px}
-.page-hero h2{font-size:clamp(1.5rem,2.5vw,2.1rem);margin-bottom:4px}
-.page-hero p{font-size:.98rem}
-.ph-art{font-size:clamp(2.5rem,5vw,4rem)}
-.toolbar{margin-bottom:18px;gap:10px}
-.grid{gap:18px;grid-template-columns:repeat(auto-fill,minmax(225px,1fr))}
-.pet .art{aspect-ratio:16/10;font-size:3.4rem}
-.pbody{padding:14px 16px 16px}
-.pbody h3{font-size:1.22rem;margin-bottom:6px}
-.chips2{gap:5px;margin-bottom:8px}
+/* ===== Compact pet cards so button is never cut off ===== */
+.page-hero{padding:16px 26px!important;margin-bottom:14px!important;border-radius:22px!important}
+.page-hero h2{font-size:1.75rem!important;margin-bottom:3px!important}
+.page-hero p{font-size:.9rem!important}
+.ph-art{font-size:3rem!important}
+.toolbar{margin-bottom:14px!important;gap:8px!important}
+.toolbar input,.toolbar select{padding:8px 13px!important;font-size:.88rem!important}
+.grid{gap:14px!important;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))!important}
+.pet .art{height:110px!important;aspect-ratio:auto!important;font-size:3rem!important}
+.pbody{padding:11px 13px 13px!important}
+.pbody h3{font-size:1.15rem!important;margin-bottom:5px!important}
+.chips2{flex-wrap:nowrap!important;overflow:hidden!important;gap:4px!important;margin-bottom:7px!important}
+.chips2 span{font-size:.68rem!important;padding:2px 7px!important;white-space:nowrap!important}
+.pbody p{font-size:.82rem!important;line-height:1.35!important;min-height:2.25em!important;margin-bottom:10px!important}
+.pbody .btn{padding:7px 14px!important;font-size:.84rem!important}
 .chips2 span{font-size:.74rem;padding:2px 9px}
 .pbody p{font-size:.88rem;line-height:1.4;min-height:2.5em;margin-bottom:12px}
 .pbody .btn{padding:8px 16px;font-size:.88rem}
