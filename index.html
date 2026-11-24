@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PawHope – Pet Adoption Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="#" aria-label="PawHope home">
+    <svg class="mark" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true">
+      <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6fb99a"/><stop offset="1" stop-color="#2f6f58"/></linearGradient></defs>
+      <rect width="48" height="48" rx="15" fill="url(#lg)"/>
+      <rect x="1" y="1" width="46" height="46" rx="14" fill="none" stroke="#fff" stroke-opacity=".35"/>
+      <g fill="#fff"><ellipse cx="14.500" cy="19" rx="3.100" ry="4"/><ellipse cx="21" cy="13.500" rx="3.100" ry="4.200"/><ellipse cx="27.800" cy="13.500" rx="3.100" ry="4.200"/><ellipse cx="34.300" cy="19" rx="3.100" ry="4"/>
+      <path d="M24.400 22.500c-5.200 0-9.400 4.300-9.400 8.300 0 2.700 2.200 4 4.700 4 1.900 0 3-.9 4.700-.9s2.800.9 4.700.9c2.500 0 4.700-1.300 4.700-4 0-4-4.200-8.300-9.400-8.300z"/></g>
+      <path d="M24.400 33.200s-3.300-2.100-3.300-4.200a1.900 1.900 0 0 1 3.300-1.300 1.900 1.900 0 0 1 3.300 1.300c0 2.100-3.300 4.200-3.300 4.200z" fill="#e0775b"/>
+    </svg>
+    <span class="word"><span class="nm"><b>P</b>aw<b>H</b>ope</span><small>Adopt • Love • Care</small></span></a>
+  <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Dark / light mode">🌙</button>
+  <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">☰</button>
+  <nav id="nav" hidden></nav>
+  <div id="userBox" hidden><span id="whoami"></span> <button class="btn sm ghost" id="notifBtn">🔔 <b id="notifCount">0</b></button> <button class="btn sm" id="logout">Logout</button></div>
+</header>
+
+<main id="app">
+  <!-- Auth -->
+  <section id="auth" class="view">
+    <div class="auth-wrap">
+      <div class="auth-hero">
+        <span class="eyebrow">Adopt • Love • Care</span>
+        <h1>Every pet deserves a <em>loving home</em></h1>
+        <p>Browse pets waiting for a family, send an adoption request in minutes, and follow every step until they come home.</p>
+        <div class="hero-stats"><div><b>500+</b><span>Pets rehomed</span></div><div><b>120</b><span>Happy families</span></div><div><b>24h</b><span>Avg. response</span></div></div>
+        <div class="floaters" aria-hidden="true"><span>🐕</span><span>🐈</span><span>🐇</span><span>🦜</span></div>
+      </div>
+      <div class="card login-card">
+        <div class="tabs"><button class="tab on" data-t="login">Login</button><button class="tab" data-t="register">Register</button></div>
+        <form id="loginForm" novalidate>
+          <label>Email<input name="email" type="email" required autocomplete="username"></label>
+          <label>Password<input name="pw" type="password" required minlength="6" autocomplete="current-password"></label>
+          <button class="btn full" type="submit">Login</button>
+          <p class="hint">Demo logins – Admin: <code>admin@pawhope.com</code> / <code>admin123</code> • Adopter: <code>user@pawhope.com</code> / <code>user123</code></p>
+        </form>
+        <form id="regForm" novalidate hidden>
+          <label>Full name<input name="name" required minlength="3"></label>
+          <label>Email<input name="email" type="email" required></label>
+          <label>Phone<input name="phone" required pattern="[0-9]{10}" placeholder="10 digits"></label>
+          <label>Password (min 6)<input name="pw" type="password" required minlength="6"></label>
+          <label>Role<select name="role"><option value="adopter">Adopter</option><option value="staff">Shelter Staff (admin code needed)</option></select></label>
+          <label id="codeRow" hidden>Staff code<input name="code" placeholder="Hint: SHELTER2026"></label>
+          <button class="btn full" type="submit">Create account</button>
+        </form>
+        <p class="msg" id="authMsg" role="alert"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dashboard -->
+  <section id="dashboard" class="view" hidden>
+    <h2>Dashboard</h2><div class="kpis" id="kpis"></div>
+    <div class="card"><h3>Adoption requests by status</h3><div id="statusChart"></div></div>
+    <div class="card" id="recentBox"><h3>Recent activity</h3><div id="recent"></div></div>
+  </section>
+
+  <!-- Browse -->
+  <section id="browse" class="view" hidden>
+    <div class="page-hero"><div><span class="eyebrow light">Find your companion</span><h2>Meet your new best friend</h2><p>Every one of these pets is vaccinated, loved and ready for a forever home.</p></div><div class="ph-art" aria-hidden="true">🐶🐱</div></div>
+    <div class="toolbar">
+      <input id="q" type="search" placeholder="Search name or breed…" aria-label="Search">
+      <select id="fSpecies"></select><select id="fStatus"><option value="">Any status</option><option>Available</option><option>Pending</option><option>Adopted</option></select>
+      <select id="fSort"><option value="new">Newest</option><option value="name">Name A–Z</option><option value="age">Youngest</option></select>
+      <label class="inl"><input type="checkbox" id="fFav"> ♥ Favourites</label>
+    </div>
+    <div class="grid" id="petGrid"></div>
+  </section>
+
+  <!-- My requests -->
+  <section id="requests" class="view" hidden>
+    <h2 id="reqTitle">Adoption Requests</h2>
+    <div class="card tablewrap"><table id="reqTable"></table></div>
+  </section>
+
+  <!-- Manage pets (staff) -->
+  <section id="manage" class="view" hidden>
+    <h2>Manage Pets</h2>
+    <form class="card form" id="petForm" novalidate>
+      <h3 id="petFormTitle">Add a pet</h3><input type="hidden" name="id">
+      <div class="row">
+        <label>Name<input name="name" required minlength="2"></label>
+        <label>Species<select name="species" required><option>Dog</option><option>Cat</option><option>Rabbit</option><option>Bird</option></select></label>
+        <label>Breed<input name="breed" required></label>
+        <label>Age (years)<input name="age" type="number" min="0" max="30" step="0.5" required></label>
+        <label>Gender<select name="gender"><option>Male</option><option>Female</option></select></label>
+        <label>Status<select name="status"><option>Available</option><option>Pending</option><option>Adopted</option></select></label>
+      </div>
+      <label>Description<textarea name="desc" rows="2" required minlength="10"></textarea></label>
+      <div class="row"><button class="btn" type="submit">Save pet</button><button class="btn ghost" type="button" id="petCancel">Clear</button></div>
+      <p class="msg" id="petMsg"></p>
+    </form>
+    <div class="card tablewrap"><table id="petTable"></table></div>
+  </section>
+
+  <!-- Users (staff) -->
+  <section id="users" class="view" hidden>
+    <h2>Users</h2>
+    <div class="card tablewrap"><table id="userTable"></table></div>
+  </section>
+
+  <!-- Reports -->
+  <section id="reports" class="view" hidden>
+    <h2>Reports</h2>
+    <div class="row">
+      <div class="card"><h3>Pets by species</h3><div id="repSpecies"></div></div>
+      <div class="card"><h3>Pets by status</h3><div id="repStatus"></div></div>
+      <div class="card"><h3>Request outcomes</h3><div id="repReq"></div></div>
+    </div>
+    <button class="btn" id="csv">⬇ Export pets (CSV)</button>
+  </section>
+</main>
+
+<div class="modal" id="modal" hidden><div class="card" id="modalBody"></div></div>
+<aside class="drawer" id="drawer" hidden><div class="dh"><b>Notifications</b><button class="btn sm ghost" id="markRead">Mark all read</button><button class="btn sm" id="closeDrawer">✕</button></div><div id="notifList"></div></aside>
+<div class="toast" id="toast"></div>
+<footer>© 2026 PawHope Pvt. Ltd.</footer>
+<script src="app.js"></script>
+</body>
+</html>
