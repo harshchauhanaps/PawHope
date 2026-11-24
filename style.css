@@ -159,18 +159,4 @@ nav button{padding:8px 14px;white-space:nowrap}
 @media(max-width:760px){.theme-btn{order:2;margin-left:auto}.menu-btn{order:3}}
 #userBox,#userBox .btn{white-space:nowrap}@media(max-width:760px){#userBox>span{font-size:.82rem}}
 
-/* ===== Rectangular pet cards that still fit cleanly in viewport ===== */
-.page-hero{padding:15px 26px!important;margin-bottom:14px!important;border-radius:22px!important}
-.page-hero h2{font-size:1.7rem!important;margin-bottom:3px!important}
-.page-hero p{font-size:.9rem!important}
-.ph-art{font-size:2.9rem!important}
-.toolbar{margin-bottom:14px!important;gap:8px!important}
-.toolbar input,.toolbar select{padding:8px 13px!important;font-size:.88rem!important}
-.grid{gap:16px!important;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))!important}
-.pet .art{height:150px!important;aspect-ratio:auto!important;font-size:3.7rem!important}
-.pbody{padding:12px 14px 14px!important}
-.pbody h3{font-size:1.15rem!important;margin-bottom:5px!important}
-.chips2{flex-wrap:nowrap!important;overflow:hidden!important;gap:4px!important;margin-bottom:7px!important}
-.chips2 span{font-size:.68rem!important;padding:2px 7px!important;white-space:nowrap!important}
-.pbody p{font-size:.82rem!important;line-height:1.35!important;min-height:2.25em!important;margin-bottom:10px!important}
-.pbody .btn{padding:7px 14px!important;font-size:.84rem!important}
+.pet .art{height:135px!important;aspect-ratio:auto!important;font-size:3.5rem!important}
